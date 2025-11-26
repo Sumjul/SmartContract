@@ -1,0 +1,333 @@
+<mxfile host="65bd71144e">
+    <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+        <mxGraphModel dx="860" dy="645" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="aM9ryv3xv72pqoxQDRHE-1" value="&lt;b&gt;Participant&lt;/b&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="40" width="100" height="880" as="geometry"/>
+                </mxCell>
+                <mxCell id="aM9ryv3xv72pqoxQDRHE-5" value="&lt;strong data-start=&quot;818&quot; data-end=&quot;831&quot;&gt;Organizer&lt;/strong&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="40" width="100" height="880" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-1" value="&lt;strong data-start=&quot;918&quot; data-end=&quot;935&quot;&gt;SmartContract&lt;/strong&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="570" y="40" width="100" height="880" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-4" value="Sequence diagram – BlockchainLottery" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="264" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-5" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="220.2017647058822" y="280" as="sourcePoint"/>
+                        <mxPoint x="619.79" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-6" value="2. Send ticket payment" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" parent="uwurvl5dIYcf5CBhCvuA-5" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="-60" y="-13" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-8" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.79" y="320" as="sourcePoint"/>
+                        <mxPoint x="220.2017647058822" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-9" value="Ticked registered" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-8" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="66" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-10" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" target="uwurvl5dIYcf5CBhCvuA-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="220" y="360" as="sourcePoint"/>
+                        <mxPoint x="379.25" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-11" value="Verify participation" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-10" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="-73" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-16" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" target="aM9ryv3xv72pqoxQDRHE-5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="620.36" y="600" as="sourcePoint"/>
+                        <mxPoint x="460.0039393939393" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-17" value="Winner selected" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-16" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="8" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-18" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" target="aM9ryv3xv72pqoxQDRHE-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.51" y="759.9999999999999" as="sourcePoint"/>
+                        <mxPoint x="299.99717948717944" y="759.9999999999999" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-19" value="5. Prize transfered to winner" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1" parent="uwurvl5dIYcf5CBhCvuA-18" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4905" y="2" relative="1" as="geometry">
+                        <mxPoint x="19" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-24" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" target="uwurvl5dIYcf5CBhCvuA-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="420" y="840" as="sourcePoint"/>
+                        <mxPoint x="609.25" y="840" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-25" value="&lt;b&gt;6. Reset lottery&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-24" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="-17" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-28" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.5" y="880" as="sourcePoint"/>
+                        <mxPoint x="420" y="880" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-29" value="Ready for next round" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-28" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="-2" y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-32" value="&lt;b&gt;Participant&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="920" width="100" height="41" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-33" value="&lt;strong data-start=&quot;818&quot; data-end=&quot;831&quot;&gt;Organizer&lt;/strong&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="920" width="100" height="41" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-34" value="&lt;strong data-start=&quot;918&quot; data-end=&quot;935&quot;&gt;SmartContract&lt;/strong&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="570" y="920" width="100" height="41" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-37" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" source="uwurvl5dIYcf5CBhCvuA-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="658" y="540"/>
+                            <mxPoint x="710" y="540"/>
+                            <mxPoint x="710" y="580"/>
+                            <mxPoint x="656.11" y="580"/>
+                        </Array>
+                        <mxPoint x="624" y="540" as="sourcePoint"/>
+                        <mxPoint x="620.0039393939393" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-38" value="&lt;b&gt;4. Select winner&lt;/b&gt;&lt;div&gt;&lt;b&gt;randomly&lt;/b&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-37" connectable="0" vertex="1">
+                    <mxGeometry x="-0.5308" y="-1" relative="1" as="geometry">
+                        <mxPoint x="-6" y="19" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-39" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="419.92857142857133" y="720" as="sourcePoint"/>
+                        <mxPoint x="619.5" y="720" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-40" value="Confirm payout" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-39" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="-17" y="-13" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-41" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="419.78571428571445" y="120" as="sourcePoint"/>
+                        <mxPoint x="620" y="120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-42" value="1. Announce new lottery" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" parent="uwurvl5dIYcf5CBhCvuA-41" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="6" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-43" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.5" y="160" as="sourcePoint"/>
+                        <mxPoint x="420" y="160" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-44" value="Lottery opened, registration active" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-43" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="-34" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-49" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" target="uwurvl5dIYcf5CBhCvuA-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="220" y="200" as="sourcePoint"/>
+                        <mxPoint x="539.5" y="200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-50" value="Check lottery status" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;" parent="uwurvl5dIYcf5CBhCvuA-49" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="-70" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-51" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" source="uwurvl5dIYcf5CBhCvuA-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="584.5882352941178" y="240" as="sourcePoint"/>
+                        <mxPoint x="220" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-52" value="status: open, ticket price: x ETH" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-51" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="30" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-55" value="" style="group" parent="1" connectable="0" vertex="1">
+                    <mxGeometry x="85" y="80" width="65" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-46" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontSize=12;spacing=2;" parent="uwurvl5dIYcf5CBhCvuA-55" vertex="1">
+                    <mxGeometry x="35" y="30" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-47" value="Lottery&lt;div&gt;preparement&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=-90;" parent="uwurvl5dIYcf5CBhCvuA-55" vertex="1">
+                    <mxGeometry x="-46" y="45" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-56" value="" style="group" parent="1" connectable="0" vertex="1">
+                    <mxGeometry x="85" y="160" width="97.5" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-57" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontSize=12;spacing=2;" parent="uwurvl5dIYcf5CBhCvuA-56" vertex="1">
+                    <mxGeometry x="35" y="30" width="30" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-58" value="Participant&#39;s interaction" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=-90;" parent="uwurvl5dIYcf5CBhCvuA-56" vertex="1">
+                    <mxGeometry x="-62" y="125" width="165" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-61" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" target="aM9ryv3xv72pqoxQDRHE-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.75" y="400" as="sourcePoint"/>
+                        <mxPoint x="460" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-62" value="Your entry confirmed: Nr x" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-61" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="44" y="-12" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-63" value="" style="group" parent="1" connectable="0" vertex="1">
+                    <mxGeometry x="85" y="400" width="97.5" height="308.06451612903226" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-64" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontSize=12;spacing=2;" parent="uwurvl5dIYcf5CBhCvuA-63" vertex="1">
+                    <mxGeometry x="35" y="29.032258064516128" width="30" height="58.064516129032256" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-65" value="Draw preparement" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=-90;" parent="uwurvl5dIYcf5CBhCvuA-63" vertex="1">
+                    <mxGeometry x="-34" y="43.54838709677419" width="95" height="29.032258064516128" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-70" value="" style="group" parent="uwurvl5dIYcf5CBhCvuA-63" connectable="0" vertex="1">
+                    <mxGeometry y="58.064516129032256" width="97.5" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-71" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontSize=12;spacing=2;" parent="uwurvl5dIYcf5CBhCvuA-70" vertex="1">
+                    <mxGeometry x="34.75" y="51.65" width="30" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-72" value="The draw" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=-90;" parent="uwurvl5dIYcf5CBhCvuA-70" vertex="1">
+                    <mxGeometry x="-62" y="129.13548387096773" width="165" height="29.032258064516128" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-66" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" target="uwurvl5dIYcf5CBhCvuA-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="420" y="440" as="sourcePoint"/>
+                        <mxPoint x="579.25" y="440" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-67" value="Request condition validation" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-66" connectable="0" vertex="1">
+                    <mxGeometry x="-0.3648" y="-3" relative="1" as="geometry">
+                        <mxPoint x="13" y="-14" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-68" value="" style="endArrow=classic;dashed=1;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" target="aM9ryv3xv72pqoxQDRHE-5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.75" y="480" as="sourcePoint"/>
+                        <mxPoint x="460" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-69" value="Conditions valid: enough tickets" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-68" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="-29" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-73" value="" style="endArrow=classic;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="420" y="520" as="sourcePoint"/>
+                        <mxPoint x="620" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-74" value="3. Initiate draw" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1" parent="uwurvl5dIYcf5CBhCvuA-73" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="-13" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-75" value="" style="endArrow=classic;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" target="aM9ryv3xv72pqoxQDRHE-1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="620.36" y="640" as="sourcePoint"/>
+                        <mxPoint x="420" y="640" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-76" value="Private message to winner: You won" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-75" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="19" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-77" value="" style="endArrow=classic;html=1;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="620.1800000000001" y="680" as="sourcePoint"/>
+                        <mxPoint x="219.82" y="680" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-78" value="Public message: Winner chosen" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-77" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4137" relative="1" as="geometry">
+                        <mxPoint x="31" y="-11" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-79" value="" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontSize=12;spacing=2;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="710" width="30" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-80" value="Payement and closure" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=-90;" parent="1" vertex="1">
+                    <mxGeometry x="23.496129032258047" y="785.4825806451613" width="165" height="29.032258064516128" as="geometry"/>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-84" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="619.75" y="800" as="sourcePoint"/>
+                        <mxPoint x="420" y="800" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-85" value="Transfer completed, loterry archived" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="uwurvl5dIYcf5CBhCvuA-84" connectable="0" vertex="1">
+                    <mxGeometry x="-0.4905" y="2" relative="1" as="geometry">
+                        <mxPoint x="-46" y="-13" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="uwurvl5dIYcf5CBhCvuA-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="uwurvl5dIYcf5CBhCvuA-79" target="uwurvl5dIYcf5CBhCvuA-79" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Julius Vilkanec, 2025-11-26" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="545" y="1019.5" width="125" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="339.5" y="1028.5" as="sourcePoint"/>
+                        <mxPoint x="500.5" y="1028.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;&amp;nbsp;direct action / transaction initiated by actor&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="3">
+                    <mxGeometry x="-0.5802" y="3" relative="1" as="geometry">
+                        <mxPoint x="40" y="-8" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="" style="endArrow=classic;html=1;dashed=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="339.5" y="1054" as="sourcePoint"/>
+                        <mxPoint x="500.5" y="1054" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;notification / event emitted (informational)&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="8">
+                    <mxGeometry x="-0.5802" y="3" relative="1" as="geometry">
+                        <mxPoint x="40" y="-8" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Steps are grouped top-to-bottom in chronological order." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="1016" width="137" height="37" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Legend:" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="973" width="60" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
