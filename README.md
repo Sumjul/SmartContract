@@ -22,7 +22,7 @@ Modelio tikslas – užtikrinti skaidrų, patikimą ir automatinį laimėtojo pa
 
 1. Organizatorius sukuria naują loteriją ir nustato fiksuotą bilieto kainą.
 2. Dalyviai įsigyja bilietus, siųsdami tiksliai bilieto kainos dydžio ETH kiekį į išmaniąją sutartį.
-3. Visi dalyviai automatiškai įtraukiami į players sąrašą.
+3. Visi dalyviai automatiškai įtraukiami į žaidėjų sąrašą.
 4. Kai loterijoje dalyvauja bent X dalyvių, organizatorius aktyvuoja „Draw Winner“ funkciją.
 5. Išmanioji sutartis atsitiktinai parenka vieną adresą iš dalyvių sąrašo.
 6. Visa surinkta suma pervedama laimėtojui.
