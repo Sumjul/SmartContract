@@ -5,11 +5,12 @@ contract BlockchainLottery {
     uint public ticketPrice;
     address[] public players;
     address public owner;
+    address public winner;
     bool public isActive = true;
 
     event TicketPurchased(address indexed buyer, uint indexed index, uint amount);
     event ExcessRefunded(address indexed buyer, uint amount);
-    event Withdrawn(address indexed owner, uint amount);
+    event Withdrawn(address indexed winner, uint amount);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can do this");
@@ -53,12 +54,17 @@ contract BlockchainLottery {
         return address(this).balance;
     }
 
-    function withdrawOwner() external onlyOwner {
-        uint amount = address(this).balance;
-        require(amount > 0, "No funds to withdraw");
-        (bool ok, ) = payable(owner).call{value: amount}("");
-        require(ok, "Withdraw failed");
-        emit Withdrawn(owner, amount);
+    function drawWinner() external onlyOwner lotteryActive {
+        require(players.length > 1, "Not enough players in lottery");
+        uint randomIndex = uint(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, players.length))) % players.length;
+        winner = players[randomIndex];
+
+        uint prize = address(this).balance;
+        (bool ok, ) = payable(winner).call{value: prize}("");
+        require(ok, "Payment to winner failed");
+
+        emit Withdrawn(winner, prize);
+        isActive = false;
     }
 
     function stopLottery() external onlyOwner {
@@ -67,6 +73,7 @@ contract BlockchainLottery {
 
     function startLottery() external onlyOwner {
         isActive = true;
-        delete players;
+        delete players; 
+        winner = address(0);
     }
 }
