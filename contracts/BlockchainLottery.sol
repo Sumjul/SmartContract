@@ -1,31 +1,52 @@
 // SPDX-License-Identifier: GPL-3.0
-
 pragma solidity ^0.8.0;
 
-contract BlockchainLotteryStep1 {
+contract BlockchainLottery {
     uint public ticketPrice;
     address[] public players;
     address public owner;
 
     event TicketPurchased(address indexed buyer, uint indexed index, uint amount);
+    event ExcessRefunded(address indexed buyer, uint amount);
+    event Withdrawn(address indexed winner, uint amount);
 
-    constructor(uint _ticketPriceWei) {
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can do this");
+        _;
+    }
+
+    constructor(uint TicketPriceInWei) {
         owner = msg.sender;
-        ticketPrice = _ticketPriceWei;
+        ticketPrice = TicketPriceInWei;
     }
 
     function buyTicket() external payable {
-        require(msg.value == ticketPrice, "Incorrect payment amount");
+        require(msg.value >= ticketPrice, "Payment is too small");
         players.push(msg.sender);
-        emit TicketPurchased(msg.sender, players.length - 1, msg.value);
+        uint index = players.length - 1;
+
+        uint excess = msg.value - ticketPrice;
+        if (excess > 0) {
+            (bool ok, ) = payable(msg.sender).call{value: excess}("");
+            require(ok, "Refund failed");
+            emit ExcessRefunded(msg.sender, excess);
+        }
+        emit TicketPurchased(msg.sender, index, ticketPrice);
     }
 
     function getPlayersCount() external view returns (uint) {
         return players.length;
     }
 
-    function getPlayer(uint index) external view returns (address) {
-        require(index < players.length, "Index out of range");
-        return players[index];
+    function getBalance() external view returns (uint) {
+        return address(this).balance;
+    }
+
+    function withdraw(address payable to) external onlyOwner {
+        uint lotteryBalance = address(this).balance;
+        require(lotteryBalance > 0, "No balance");
+        (bool ok, ) = to.call{value: lotteryBalance}("");
+        require(ok, "Withdraw failed");
+        emit Withdrawn(to, lotteryBalance);
     }
 }
