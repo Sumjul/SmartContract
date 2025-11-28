@@ -5,13 +5,19 @@ contract BlockchainLottery {
     uint public ticketPrice;
     address[] public players;
     address public owner;
+    bool public isActive = true;
 
     event TicketPurchased(address indexed buyer, uint indexed index, uint amount);
     event ExcessRefunded(address indexed buyer, uint amount);
-    event Withdrawn(address indexed winner, uint amount);
+    event Withdrawn(address indexed owner, uint amount);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can do this");
+        _;
+    }
+
+    modifier lotteryActive() {
+        require(isActive, "Lottery is not active");
         _;
     }
 
@@ -20,7 +26,8 @@ contract BlockchainLottery {
         ticketPrice = TicketPriceInWei;
     }
 
-    function buyTicket() external payable {
+    function buyTicket() external payable lotteryActive {
+        require(msg.sender != owner, "Owner cannot buy tickets");
         require(msg.value >= ticketPrice, "Payment is too small");
         players.push(msg.sender);
         uint index = players.length - 1;
@@ -34,6 +41,10 @@ contract BlockchainLottery {
         emit TicketPurchased(msg.sender, index, ticketPrice);
     }
 
+    function getPlayers() external view returns (address[] memory) {
+        return players;
+    }
+
     function getPlayersCount() external view returns (uint) {
         return players.length;
     }
@@ -42,11 +53,20 @@ contract BlockchainLottery {
         return address(this).balance;
     }
 
-    function withdraw(address payable to) external onlyOwner {
-        uint lotteryBalance = address(this).balance;
-        require(lotteryBalance > 0, "No balance");
-        (bool ok, ) = to.call{value: lotteryBalance}("");
+    function withdrawOwner() external onlyOwner {
+        uint amount = address(this).balance;
+        require(amount > 0, "No funds to withdraw");
+        (bool ok, ) = payable(owner).call{value: amount}("");
         require(ok, "Withdraw failed");
-        emit Withdrawn(to, lotteryBalance);
+        emit Withdrawn(owner, amount);
+    }
+
+    function stopLottery() external onlyOwner {
+        isActive = false;
+    }
+
+    function startLottery() external onlyOwner {
+        isActive = true;
+        delete players;
     }
 }
