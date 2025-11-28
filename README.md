@@ -52,3 +52,12 @@ Organizatorius paskelbia naują loteriją, sutartis aktyvuojama, dalyviai gali t
 ---
 
 Ši diagrama padeda aiškiai suprasti verslo logiką ir tarpusavio sąveikas, kurios bus perkeltos į „Solidity“ išmaniąją sutartį ir decentralizuotą aplikaciją.
+
+## Papildomi duomenys
+
+Užduoties atlikimas: ...
+Autorius: Julius Vilkanec
+Studijų programa: Informacinių sistemų inžinerija, Vilniaus Universitetas
+Kursas: 2 kursas
+Versija: v0.01
+Data: 2025-11-26
