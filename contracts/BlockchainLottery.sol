@@ -11,6 +11,10 @@ contract BlockchainLottery {
     event TicketPurchased(address indexed buyer, uint indexed index, uint amount);
     event ExcessRefunded(address indexed buyer, uint amount);
     event Withdrawn(address indexed winner, uint amount);
+    event WinnerSelected(address indexed winner, uint amount);
+    event LotteryStarted(uint ticketPrice, uint timestamp);
+    event LotteryStopped(uint timestamp);
+    event TicketPriceChanged(uint oldPrice, uint newPrice, uint timestamp);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can do this");
@@ -22,9 +26,18 @@ contract BlockchainLottery {
         _;
     }
 
-    constructor(uint TicketPriceInWei) {
+    constructor(uint ticketPriceInEth) {
         owner = msg.sender;
-        ticketPrice = TicketPriceInWei;
+        ticketPrice = ticketPriceInEth * 1 ether;
+    }
+
+    function setTicketPrice(uint newPriceInEth) external onlyOwner {
+        require(!isActive, "Stop lottery before changing ticket price");
+
+        uint oldPrice = ticketPrice;
+        ticketPrice = newPriceInEth * 1 ether;
+
+        emit TicketPriceChanged(oldPrice, ticketPrice, block.timestamp);
     }
 
     function buyTicket() external payable lotteryActive {
@@ -56,6 +69,8 @@ contract BlockchainLottery {
 
     function drawWinner() external onlyOwner lotteryActive {
         require(players.length > 1, "Not enough players in lottery");
+        require(winner == address(0), "Winner already selected");
+
         uint randomIndex = uint(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, players.length))) % players.length;
         winner = players[randomIndex];
 
@@ -63,17 +78,20 @@ contract BlockchainLottery {
         (bool ok, ) = payable(winner).call{value: prize}("");
         require(ok, "Payment to winner failed");
 
+        emit WinnerSelected(winner, prize);
         emit Withdrawn(winner, prize);
         isActive = false;
     }
 
     function stopLottery() external onlyOwner {
         isActive = false;
+        emit LotteryStopped(block.timestamp);
     }
 
     function startLottery() external onlyOwner {
         isActive = true;
         delete players; 
         winner = address(0);
+        emit LotteryStarted(ticketPrice, block.timestamp);
     }
 }
