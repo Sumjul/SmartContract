@@ -8,12 +8,10 @@ contract BlockchainLottery {
     address public owner;
     address public winner;
     bool public isActive = false;
-    uint public totalWin;
-    mapping(address => uint) public pendingRefunds;
+    uint public totalPot;
     mapping(address => uint) public pendingWinnings;
 
     event TicketPurchased(address indexed buyer, uint indexed index, uint amount);
-    event RefundAvailable(address indexed buyer, uint amount);
     event Withdrawn(address indexed recipient, uint amount);
     event WinnerSelected(address indexed winner, uint amount);
     event LotteryStarted(uint ticketPrice, uint minPlayers, uint timestamp);
@@ -53,15 +51,11 @@ contract BlockchainLottery {
 
     function buyTicket() external payable lotteryActive {
         require(msg.sender != owner, "Owner cannot buy tickets");
-        require(msg.value >= ticketPrice, "Payment is too small");
-        players.push(msg.sender);
+        require(msg.value == ticketPrice, "Send exact ticket price");
 
-        uint excess = msg.value - ticketPrice;
-        if (excess > 0) {
-            pendingRefunds[msg.sender] += excess;
-            emit RefundAvailable(msg.sender, excess);
-        }
-        totalWin += ticketPrice;
+        players.push(msg.sender);
+        totalPot += msg.value;
+
         emit TicketPurchased(msg.sender, players.length - 1, ticketPrice);
     }
 
@@ -69,32 +63,30 @@ contract BlockchainLottery {
         require(players.length >= minPlayers, "Not enough players in lottery");
         require(winner == address(0), "Winner already selected");
 
-        uint randomIndex = uint(keccak256(abi.encodePacked(block.timestamp, block.number, players.length))) % players.length;
-        winner = players[randomIndex];
-        pendingWinnings[winner] += totalWin;
-        emit PayoutPending(winner, totalWin);
-        emit WinnerSelected(winner, totalWin);
-        totalWin = 0;
+        uint randomIndex = uint(
+            keccak256(abi.encodePacked(block.timestamp, block.number, players.length))
+        ) % players.length;
 
+        winner = players[randomIndex];
+        pendingWinnings[winner] = totalPot;
+
+        emit PayoutPending(winner, totalPot);
+        emit WinnerSelected(winner, totalPot);
+
+        totalPot = 0;
         delete players;
         isActive = false;
         emit LotteryStopped(block.timestamp);
     }
 
     function withdrawPrize() external {
-        uint refundAmount = pendingRefunds[msg.sender];
-        if (refundAmount > 0) {
-            pendingRefunds[msg.sender] = 0;
-            (bool okR, ) = payable(msg.sender).call{value: refundAmount}("");
-            require(okR, "Refund transfer failed");
-            emit Withdrawn(msg.sender, refundAmount);
-        }
-
         uint winAmount = pendingWinnings[msg.sender];
         require(winAmount > 0, "No winnings to withdraw");
+
         pendingWinnings[msg.sender] = 0;
-        (bool okW, ) = payable(msg.sender).call{value: winAmount}("");
-        require(okW, "Winning transfer failed");
+        (bool ok, ) = payable(msg.sender).call{value: winAmount}("");
+        require(ok, "Transfer failed");
+
         emit Withdrawn(msg.sender, winAmount);
 
         if (msg.sender == winner) {
@@ -110,22 +102,28 @@ contract BlockchainLottery {
         require(amount > 0, "No funds to withdraw");
         (bool ok, ) = to.call{value: amount}("");
         require(ok, "Owner withdraw failed");
+
         emit Withdrawn(to, amount);
     }
 
     function startLottery() external onlyOwner {
         require(!isActive, "Lottery already active");
+        require(winner == address(0), "Clear previous winner before starting");
+
         isActive = true;
         delete players;
-        winner = address(0);
+        totalPot = 0;
         emit LotteryStarted(ticketPrice, minPlayers, block.timestamp);
     }
 
     function stopLottery() external onlyOwner {
         require(isActive, "Lottery already stopped");
+
         isActive = false;
-        emit LotteryStopped(block.timestamp);
         delete players;
+        totalPot = 0;
+
+        emit LotteryStopped(block.timestamp);
     }
 
     function getPlayers() external view returns (address[] memory) {
