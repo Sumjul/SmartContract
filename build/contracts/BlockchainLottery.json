@@ -21730,10 +21730,16 @@
       "links": {},
       "address": "0xD5e52A240396d9ba8e62FcAc920914F2349Fb359",
       "transactionHash": "0x4074793a8f56ecd7c330305645e09d9b1c69dd981734eecc82e603e1398453d2"
+    },
+    "11155111": {
+      "events": {},
+      "links": {},
+      "address": "0x4fFCFA20f2a1749221D06EA57aD60F69Eef88d2f",
+      "transactionHash": "0x75dc9ada504ebd069a39c303d8aa5cc4597d45fc3c9cbda72bc2e2ecfa072d14"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-12-08T12:20:18.926Z",
+  "updatedAt": "2025-12-08T14:25:50.066Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
