@@ -30,7 +30,7 @@ h2 {
   color: #444;
 }
 
-/* Button styles */
+/* Buttons */
 .buttons {
   display: flex;
   flex-wrap: wrap;
@@ -78,15 +78,53 @@ button {
 }
 
 /* Log section */
-.log-section pre {
-  background-color: #272822;
-  color: #f8f8f2;
-  padding: 15px;
-  border-radius: 8px;
-  height: 280px;
-  overflow-y: auto;
+#outputContainer {
+  width: 100%;
+  height: 300px;
+  background-color: #1e1e1e;
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#output {
+  margin: 0;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: 'Courier New', Courier, monospace;
-  line-height: 1.8;
+  height: 100%;
+  overflow-y: auto;
+  font-family: monospace;
+  line-height: 1.6em;
+}
+
+/* Progress bar */
+#lotteryProgressContainer {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+#lotteryProgressBar {
+  height: 100%;
+  width: 0%;
+  background-color: #4CAF50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  transition: width 0.5s;
+  border-radius: 10px 0 0 10px;
+}
+
+/* Winner animation */
+#winnerAnimation {
+  font-size: 20px;
+  color: gold;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
 }
