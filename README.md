@@ -57,12 +57,6 @@ Organizatorius paskelbia naują loteriją, sutartis aktyvuojama, dalyviai gali t
 
 ### Lokalūs testai su Truffle
 
-- Kompilioti išmaniąją sutartį
-
-``` bash
-truffle compile
-```
-
 - Paleisti Truffle blockchain (atskirame terminale) su 10 testinių adresų ir 100 ETH kiekviename iš jų
 
 ``` bash
@@ -161,4 +155,4 @@ Perėjęs į Sepolia testnet, atlikau papildomus testus su MetaMask paskyromis i
 **Studijų programa:** Informacinių sistemų inžinerija, Vilniaus Universitetas  
 **Kursas:** 2 kursas  
 **Versija:** v0.1  
-**Data:** 2025-12-08
+**Data:** 2025-12-09

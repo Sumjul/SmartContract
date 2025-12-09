@@ -9,7 +9,9 @@ contract BlockchainLottery {
     address public winner;
     bool public isActive = false;
     uint public totalPot;
+
     mapping(address => uint) public pendingWinnings;
+    mapping(address => bool) public hasTicket;
 
     event TicketPurchased(address indexed buyer, uint indexed index, uint amount);
     event Withdrawn(address indexed recipient, uint amount);
@@ -53,6 +55,9 @@ contract BlockchainLottery {
         require(msg.sender != owner, "Owner cannot buy tickets");
         require(msg.value == ticketPrice, "Send exact ticket price");
 
+        require(!hasTicket[msg.sender], "You already bought a ticket");
+        hasTicket[msg.sender] = true;
+
         players.push(msg.sender);
         totalPot += msg.value;
 
@@ -74,6 +79,10 @@ contract BlockchainLottery {
         emit WinnerSelected(winner, totalPot);
 
         totalPot = 0;
+        for (uint i = 0; i < players.length; i++) {
+            hasTicket[players[i]] = false;
+        }
+
         delete players;
         isActive = false;
         emit LotteryStopped(block.timestamp);
@@ -113,13 +122,15 @@ contract BlockchainLottery {
         isActive = true;
         delete players;
         totalPot = 0;
-        emit LotteryStarted(ticketPrice, minPlayers, block.timestamp);
     }
 
     function stopLottery() external onlyOwner {
         require(isActive, "Lottery already stopped");
 
         isActive = false;
+        for (uint i = 0; i < players.length; i++) {
+            hasTicket[players[i]] = false;
+        }
         delete players;
         totalPot = 0;
 
