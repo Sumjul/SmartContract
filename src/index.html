@@ -1,60 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Blockchain Lottery</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Blockchain Lottery Frontend</h1>
+    <header class="top-header">
+      <h1>Blockchain Lottery</h1>
+      <div id="globalStatus" class="global-status">
+        <div id="globalStatusText"></div>
+      </div>
+    </header>
 
-    <section class="owner-section">
-      <h2>Owner Actions</h2>
-      <div class="buttons">
-        <button onclick="startLottery()">Start Lottery</button>
-        <button onclick="stopLottery()">Stop Lottery</button>
-        <button onclick="drawWinner()">Draw Winner</button>
-        <button onclick="setTicketPricePrompt()">Set Ticket Price</button>
-        <button onclick="setMinPlayersPrompt()">Set Min Players</button>
-        <button onclick="withdrawAllByOwnerPrompt()">Withdraw All</button>
+    <section class="stages-section">
+      <div class="stage" id="stage-start">
+        <div class="stage-title">1. Owner starts lottery</div>
+        <div class="stage-body">
+          <div class="stage-subtext" id="stage-start-text"></div>
+        </div>
+      </div>
+
+      <div class="stage" id="stage-players">
+        <div class="stage-title">2. Players register</div>
+        <div class="stage-body">
+          <div id="playersProgressContainer" class="small-progress">
+            <div id="playersProgressBar"></div>
+          </div>
+          <div class="stage-subtext" id="stage-players-text"></div>
+        </div>
+      </div>
+
+      <div class="stage" id="stage-draw">
+        <div class="stage-title">3. Winner is chosen</div>
+        <div class="stage-body">
+          <div class="stage-subtext" id="stage-draw-text"></div>
+        </div>
+      </div>
+
+      <div class="stage" id="stage-end">
+        <div class="stage-title">4. Lottery completed</div>
+        <div class="stage-body">
+          <div class="stage-subtext" id="stage-end-text"></div>
+        </div>
       </div>
     </section>
 
-    <section class="player-section">
-      <h2>Player Actions</h2>
-      <div class="buttons">
-        <button onclick="buyTicket()">Buy Ticket</button>
-        <button onclick="withdrawPrize()">Withdraw Prize</button>
-      </div>
-    </section>
+    <main class="main-grid">
+      <section class="owner-section card">
+        <h2>Owner Actions</h2>
+        <div class="buttons">
+          <button onclick="startLottery()">Start Lottery</button>
+          <button onclick="drawWinner()">Draw Winner</button>
+          <button onclick="stopLottery()">Stop Lottery</button>
+          <button onclick="withdrawAllByOwnerPrompt()">Withdraw All</button>
+          <button onclick="setTicketPricePrompt()">Set Ticket Price</button>
+          <button onclick="setMinPlayersPrompt()">Set Min Players</button>
+        </div>
+      </section>
 
-    <section class="info-section">
-      <h2>View Info</h2>
-      <div class="buttons">
-        <button onclick="showPlayers()">Show Players</button>
-        <button onclick="showPlayersCount()">Players Count</button>
-        <button onclick="showWinner()">Show Winner</button>
-        <button onclick="showStatus()">Show Status</button>
-        <button onclick="showBalance()">Show Contract Balance</button>
-      </div>
-    </section>
+      <section class="player-section card">
+        <h2>Player Actions</h2>
+        <div class="buttons">
+          <button onclick="buyTicket()">Buy Ticket</button>
+          <button onclick="withdrawPrize()">Withdraw Prize</button>
+        </div>
+      </section>
 
-    <section class="progress-section">
-      <h2>Lottery Progress</h2>
-      <div id="lotteryProgressContainer">
-        <div id="lotteryProgressBar"></div>
-      </div>
-      <p id="progressText">0 / 0 players</p>
-    </section>
+      <section class="info-section card">
+        <h2>View Info</h2>
+        <div class="buttons">
+          <button onclick="showStatus()">Show Status</button>
+          <button onclick="showWinner()">Show Winner</button>
+          <button onclick="showPlayers()">Show Players</button>
+          <button onclick="showPlayersCount()">Players Count</button>
+          <button onclick="showBalance()">Lottery Balance</button>
+        </div>
+      </section>
+    </main>
 
-    <section class="log-section">
-      <h2>Lottery Log</h2>
+    <section class="log-section card">
+      <h2>Full Lottery Log</h2>
       <div id="outputContainer">
         <pre id="output"></pre>
       </div>
     </section>
-
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
