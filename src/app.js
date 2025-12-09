@@ -465,14 +465,13 @@ function timestamp() {
   return dt.toLocaleTimeString();
 }
 
-function log(msg, type = "info") {
-  const out = document.getElementById("output");
-  const div = document.createElement("div");
-  div.className = `log-${type}`;
-  div.textContent = `[${timestamp()}] ${msg}`;
-  out.appendChild(div);
-  const container = document.getElementById("outputContainer");
-  container.scrollTop = container.scrollHeight;
+function log(msg,type="info"){ 
+  const out = document.getElementById("output"); 
+  const div = document.createElement("div"); 
+  div.className = `log-${type}`; 
+  div.textContent = `[${timestamp()}] ${msg}`; 
+  out.appendChild(div); 
+  out.parentElement.scrollTop = out.scrollHeight;
 }
 
 function clearLog() {
@@ -497,43 +496,24 @@ function setGlobalStatus(text, level = "info") {
   }
 }
 
-function setStage(stageIndex, shortText) {
+function setStage(stageIndex) {
   const stages = ["start", "players", "draw", "end"];
+  const texts = [
+    "Waiting for owner to start lottery...",
+    "Waiting for min amount of players...",
+    "Waiting for lottery selecting winner...",
+    "Waiting for lottery closure..."
+  ];
+
   for (let i = 0; i < stages.length; i++) {
     const el = document.getElementById(`stage-${stages[i]}`);
-    if (el) {
-      el.style.border = "none";
-    }
   }
-
   const currentEl = document.getElementById(`stage-${stages[stageIndex]}`);
-  if (currentEl) {
-    currentEl.style.border = "2px solid rgba(30,144,255,0.12)";
-  }
 
-  const startTextEl = document.getElementById("stage-start-text");
-  const playersTextEl = document.getElementById("stage-players-text");
-  const drawTextEl = document.getElementById("stage-draw-text");
-  const endTextEl = document.getElementById("stage-end-text");
-
-  if (stageIndex === 0) {
-    startTextEl.innerText = shortText || "Waiting to start...";
-  } else {
-    startTextEl.innerText = "Lottery is active";
-  }
-  if (stageIndex === 1) {
-    playersTextEl.innerText = shortText || "Registering players...";
-  }
-  if (stageIndex === 2) {
-    drawTextEl.innerText = shortText || "Selecting winner...";
-  } else {
-    drawTextEl.innerText = "Waiting for lottery to choose winner...";
-  }
-  if (stageIndex === 3) {
-    endTextEl.innerText = shortText || "Lottery completed";
-  } else {
-    endTextEl.innerText = "Lottery not completed";
-  }
+  document.getElementById("stage-start-text").innerText = texts[0];
+  document.getElementById("stage-players-text").innerText = texts[1];
+  document.getElementById("stage-draw-text").innerText = texts[2];
+  document.getElementById("stage-end-text").innerText = texts[3];
 }
 
 // Players progress
@@ -544,26 +524,22 @@ async function updateProgress() {
     const minPlayers = parseInt(await contract.methods.minPlayers().call());
     const isActive = await contract.methods.isActive().call().catch(() => false);
     const progressBar = document.getElementById("playersProgressBar");
-    if (minPlayers > 0) {
-      const widthPercent = Math.min(100, Math.round((playersCount / minPlayers) * 100));
-      progressBar.style.width = widthPercent + "%";
-    } else {
-      progressBar.style.width = "0%";
-    }
+    progressBar.style.width = minPlayers > 0 ? Math.min(100, Math.round((playersCount / minPlayers) * 100)) + "%" : "0%";
     const playersTextEl = document.getElementById("stage-players-text");
     playersTextEl.innerText = `${playersCount} / ${minPlayers} players`;
-
-    if (isActive) {
-      if (playersCount < minPlayers) {
-        setGlobalStatus("Players joining...", "info");
-        setStage(1, "Joining...");
+    if (!isBuyingTicket) { 
+      if (isActive) {
+        if (playersCount < minPlayers) {
+          setGlobalStatus("Players joining...", "info");
+          setStage(1);
+        } else {
+          setGlobalStatus("Minimum players reached — ready for draw", "info");
+          setStage(1);
+        }
       } else {
-        setGlobalStatus("Minimum players reached — ready for draw", "info");
-        setStage(1, "Ready for draw");
+        setGlobalStatus("Lottery inactive", "warn");
+        setStage(0);
       }
-    } else {
-      setGlobalStatus("Lottery inactive", "warn");
-      setStage(0, "Stopped");
     }
   } catch (err) {
     log("Error updating progress: " + (err.message || err), "error");
@@ -573,8 +549,8 @@ async function updateProgress() {
 async function init() {
   try {
     if (!window.ethereum) {
-      setGlobalStatus("MetaMask not found", "error");
-      log("MetaMask not found", "error");
+      setGlobalStatus("MetaMask account not found", "error");
+      log("MetaMask account not found", "error");
       return;
     }
     web3 = new Web3(window.ethereum);
@@ -602,10 +578,10 @@ async function init() {
 }
 
 // Owner functions
-async function ownerTx(method, successMsg, stageIndex, stageText) {
+async function ownerTx(method, successMsg, stageIndex) {
   try {
     setGlobalStatus(successMsg + "...", "info");
-    setStage(stageIndex, stageText);
+    setStage(stageIndex);
     log(`Owner: ${method._method.name} called`, "pending");
     const tx = method.send({ from: accounts[0] });
 
@@ -629,15 +605,15 @@ async function ownerTx(method, successMsg, stageIndex, stageText) {
 }
 
 function startLottery() {
-  return ownerTx(contract.methods.startLottery(), "Lottery started", 1, "Players registration");
+  return ownerTx(contract.methods.startLottery(), "Lottery started!", 1);
 }
 
 function stopLottery() {
-  return ownerTx(contract.methods.stopLottery(), "Lottery stopped", 0, "Stopped");
+  return ownerTx(contract.methods.stopLottery(), "Lottery stopped!", 0);
 }
 
 function drawWinner() {
-  return ownerTx(contract.methods.drawWinner(), "Winner selected", 3, "Completed").then(async () => {
+  return ownerTx(contract.methods.drawWinner(), "Winner selected", 3).then(async () => {
     try {
       const winner = await contract.methods.winner().call();
       log("Winner: " + winner, "success");
@@ -651,35 +627,29 @@ function drawWinner() {
 
 function setTicketPricePrompt() {
   const price = prompt("Enter new ticket price in wei:");
-  if (price) {
-    setTicketPrice(price);
-  }
+  if (price) setTicketPrice(price);
 }
 
 function setTicketPrice(price) {
-  return ownerTx(contract.methods.setTicketPrice(price), "Ticket price set: " + price, 1, "Players registration");
+  return ownerTx(contract.methods.setTicketPrice(price), "Ticket price set: " + price, 1);
 }
 
 function setMinPlayersPrompt() {
   const minPlayers = prompt("Enter new minimum players:");
-  if (minPlayers) {
-    setMinPlayers(minPlayers);
-  }
+  if (minPlayers) setMinPlayers(minPlayers);
 }
 
 function setMinPlayers(minPlayers) {
-  return ownerTx(contract.methods.setMinPlayers(minPlayers), "Minimum players set: " + minPlayers, 1, "Players registration");
+  return ownerTx(contract.methods.setMinPlayers(minPlayers), "Minimum players set: " + minPlayers, 1);
 }
 
 function withdrawAllByOwnerPrompt() {
   const addr = prompt("Enter address to withdraw all funds:");
-  if (addr) {
-    withdrawAllByOwner(addr);
-  }
+  if (addr) withdrawAllByOwner(addr);
 }
 
 function withdrawAllByOwner(addr) {
-  return ownerTx(contract.methods.withdrawAllByOwner(addr), "Owner withdrew all funds to " + addr, 1, "Players registration");
+  return ownerTx(contract.methods.withdrawAllByOwner(addr), "Owner withdrew all funds to " + addr, 1);
 }
 
 // Player functions
@@ -688,12 +658,14 @@ function shorten(address) {
   return address.slice(0, 6) + "…" + address.slice(-4);
 }
 
+let isBuyingTicket = false;
 async function buyTicket() {
   try {
     const buyer = accounts[0];
     log(`${shorten(buyer)} buying ticket...`, "pending");
     setGlobalStatus(`${shorten(buyer)} buying ticket...`, "info");
-    setStage(1, "Buying ticket");
+    setStage(1);
+    isBuyingTicket = true;
     const price = await contract.methods.ticketPrice().call().catch(() => 0);
     const tx = contract.methods.buyTicket().send({ from: buyer, value: price });
 
@@ -703,11 +675,13 @@ async function buyTicket() {
     tx.on("receipt", (receipt) => {
       log("Ticket purchased: Tx " + receipt.transactionHash, "success");
       setGlobalStatus("Purchase confirmed", "success");
+      isBuyingTicket = false;
       updateProgress();
     });
     tx.on("error", (err) => {
       log("buyTicket error: " + (err.message || err), "error");
       setGlobalStatus("Error buying ticket", "error");
+      isBuyingTicket = false;
       updateProgress();
     });
 
@@ -715,6 +689,7 @@ async function buyTicket() {
   } catch (err) {
     log("buyTicket exception: " + (err.message || err), "error");
     setGlobalStatus("Error initiating purchase", "error");
+    isBuyingTicket = false;
   }
 }
 
@@ -737,11 +712,7 @@ async function withdrawPrize() {
 async function checkMyTicket() {
   try {
     const has = await contract.methods.hasTicket(accounts[0]).call();
-    if (has) {
-      log("You have a ticket.", "success");
-    } else {
-      log("You do not have a ticket.", "info");
-    }
+    log(has ? "You have a ticket." : "You do not have a ticket.", has ? "success" : "info");
   } catch (err) {
     log("checkMyTicket error: " + (err.message || err), "error");
   }
@@ -750,8 +721,7 @@ async function checkMyTicket() {
 async function checkMyWinnings() {
   try {
     const win = await contract.methods.pendingWinnings(accounts[0]).call();
-    const eth = web3.utils.fromWei(win, "ether");
-    log(`Pending winnings: ${eth} ETH`, "info");
+    log(`Pending winnings: ${web3.utils.fromWei(win, "ether")} ETH`, "info");
   } catch (err) {
     log("checkMyWinnings error: " + (err.message || err), "error");
   }
@@ -761,11 +731,7 @@ async function checkMyWinnings() {
 async function showPlayers() {
   try {
     const players = await contract.methods.getPlayers().call();
-    if (players.length > 0) {
-      log("Players: " + players.join(", "), "info");
-    } else {
-      log("Players: none", "info");
-    }
+    log("Players: " + (players.length ? players.join(", ") : "none"), "info");
   } catch (err) {
     log("showPlayers error: " + (err.message || err), "error");
   }
@@ -783,11 +749,7 @@ async function showPlayersCount() {
 async function showWinner() {
   try {
     const winner = await contract.methods.winner().call();
-    if (winner === "0x0000000000000000000000000000000000000000") {
-      log("Winner: none", "success");
-    } else {
-      log("Winner: " + winner, "success");
-    }
+    log("Winner: " + (winner === "0x0000000000000000000000000000000000000000" ? "none" : winner), "success");
   } catch (err) {
     log("showWinner error: " + (err.message || err), "error");
   }
@@ -796,21 +758,12 @@ async function showWinner() {
 async function showStatus() {
   try {
     const status = await contract.methods.getStatus().call();
-    const isActive = status.active ? "Yes" : "No";
-    const ticketPrice = web3.utils.fromWei(status.price, "ether") + " ETH";
-    const minPlayers = status.minP;
-    const currentPlayers = status.playersCount;
-    const winnerAddress = status.currentWinner === "0x0000000000000000000000000000000000000000"
-      ? "None"
-      : status.currentWinner;
-
     log("Lottery Status:", "info");
-    log("  Active: " + isActive, "info");
-    log("  Ticket Price: " + ticketPrice, "info");
-    log("  Minimum Players Required: " + minPlayers, "info");
-    log("  Current Players: " + currentPlayers, "info");
-    log("  Current Winner: " + winnerAddress, "info");
-    
+    log("  Active: " + (status.active ? "Yes" : "No"), "info");
+    log("  Ticket Price: " + web3.utils.fromWei(status.price, "ether") + " ETH", "info");
+    log("  Minimum Players Required: " + status.minP, "info");
+    log("  Current Players: " + status.playersCount, "info");
+    log("  Current Winner: " + (status.currentWinner === "0x0000000000000000000000000000000000000000" ? "None" : status.currentWinner), "info");
   } catch (err) {
     log("showStatus error: " + (err.message || err), "error");
   }
@@ -819,8 +772,7 @@ async function showStatus() {
 async function showBalance() {
   try {
     const balance = await contract.methods.getBalance().call();
-    const eth = web3.utils.fromWei(balance, "ether");
-    log("Lottery balance: " + eth + " ETH", "info");
+    log("Lottery balance: " + web3.utils.fromWei(balance, "ether") + " ETH", "info");
   } catch (err) {
     log("showBalance error: " + (err.message || err), "error");
   }
@@ -829,11 +781,9 @@ async function showBalance() {
 // Winner highlight
 function animateWinner(address) {
   const out = document.getElementById("output");
-
   const note = document.createElement("div");
   note.className = "winner-note";
   note.textContent = `🏆 Winner: ${address} 🏆`;
-
   out.appendChild(note);
   const container = document.getElementById("outputContainer");
   container.scrollTop = out.scrollHeight;

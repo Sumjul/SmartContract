@@ -7,46 +7,33 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header class="top-header">
+<div class="container">
+    <div class="top-header">
       <h1>Blockchain Lottery</h1>
       <div id="globalStatus" class="global-status">
-        <div id="globalStatusText"></div>
+        <span id="globalStatusText">Connecting...</span>
       </div>
-    </header>
+    </div>
 
-    <section class="stages-section">
+    <div class="stages-section">
       <div class="stage" id="stage-start">
-        <div class="stage-title">1. Owner starts lottery</div>
-        <div class="stage-body">
-          <div class="stage-subtext" id="stage-start-text"></div>
-        </div>
+        <div class="stage-title">1. Lottery Starts</div>
+        <div class="stage-subtext" id="stage-start-text">Waiting for owner to start lottery...</div>
       </div>
-
       <div class="stage" id="stage-players">
-        <div class="stage-title">2. Players register</div>
-        <div class="stage-body">
-          <div id="playersProgressContainer" class="small-progress">
-            <div id="playersProgressBar"></div>
-          </div>
-          <div class="stage-subtext" id="stage-players-text"></div>
-        </div>
+        <div class="stage-title">2. Players Register</div>
+        <div class="stage-subtext" id="stage-players-text">Waiting for min amount of players...</div>
+        <div class="small-progress"><div id="playersProgressBar"></div></div>
       </div>
-
       <div class="stage" id="stage-draw">
-        <div class="stage-title">3. Winner is chosen</div>
-        <div class="stage-body">
-          <div class="stage-subtext" id="stage-draw-text"></div>
-        </div>
+        <div class="stage-title">3. Selecting Winner</div>
+        <div class="stage-subtext" id="stage-draw-text">Waiting for lottery selecting winner...</div>
       </div>
-
       <div class="stage" id="stage-end">
-        <div class="stage-title">4. Lottery completed</div>
-        <div class="stage-body">
-          <div class="stage-subtext" id="stage-end-text"></div>
-        </div>
+        <div class="stage-title">4. Lottery Ends</div>
+        <div class="stage-subtext" id="stage-end-text">Waiting for lottery closure...</div>
       </div>
-    </section>
+    </div>
 
     <main class="main-grid">
       <section class="owner-section card">
