@@ -5,16 +5,29 @@
   <title>Blockchain Lottery</title>
 </head>
 <body>
-  <h1>BlockchainLottery Test</h1>
+  <h1>Blockchain Lottery Frontend</h1>
 
+  <h2>Owner actions</h2>
   <button onclick="startLottery()">Start Lottery</button>
-  <button onclick="buyTicket()">Buy Ticket</button>
-  <button onclick="showPlayers()">Show Players</button>
+  <button onclick="stopLottery()">Stop Lottery</button>
   <button onclick="drawWinner()">Draw Winner</button>
-  <button onclick="showWinner()">Show Winner</button>
+  <button onclick="setTicketPricePrompt()">Set Ticket Price</button>
+  <button onclick="setMinPlayersPrompt()">Set Min Players</button>
+  <button onclick="withdrawAllByOwnerPrompt()">Withdraw All</button>
+
+  <h2>Player actions</h2>
+  <button onclick="buyTicket()">Buy Ticket</button>
   <button onclick="withdrawPrize()">Withdraw Prize</button>
 
-  <p id="winner">Winner: —</p>
+  <h2>View info</h2>
+  <button onclick="showPlayers()">Show Players</button>
+  <button onclick="showPlayersCount()">Players Count</button>
+  <button onclick="showWinner()">Show Winner</button>
+  <button onclick="showStatus()">Show Status</button>
+  <button onclick="showBalance()">Show Contract Balance</button>
+
+  <h2>Logs</h2>
+  <pre id="output" style="background:#f0f0f0; padding:10px; height:200px; overflow:auto;"></pre>
 
   <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
   <script src="app.js"></script>

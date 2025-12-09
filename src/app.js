@@ -2,13 +2,8 @@ let web3;
 let contract;
 let accounts;
 
-async function init() {
-  if (window.ethereum) {
-    web3 = new Web3(window.ethereum);
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    accounts = await web3.eth.getAccounts();
-    console.log("MetaMask accounts:", accounts);
-    const abi = [
+const contractAddress = "0x8724Be47A52aA5b922DDA6313A4bA2E80b57224A";
+const abi = [
     {
       "inputs": [
         {
@@ -466,80 +461,130 @@ async function init() {
       "constant": true
     }
     ];
-    const contractAddress = "0x8724Be47A52aA5b922DDA6313A4bA2E80b57224A";
+
+async function init() {
+  if (window.ethereum) {
+    web3 = new Web3(window.ethereum);
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    accounts = await web3.eth.getAccounts();
     contract = new web3.eth.Contract(abi, contractAddress);
-
-    const players = await contract.methods.getPlayers().call();
-    console.log("Players in contract:", players);
-
-    console.log("Contract owner:", await contract.methods.owner().call());
-    console.log("Current account:", accounts[0]);
-
+    log("MetaMask accounts: " + accounts);
+    log("Contract owner: " + await contract.methods.owner().call());
   } else {
-    console.log("MetaMask not found");
+    log("MetaMask not found");
   }
 }
 
+function log(msg) {
+  console.log(msg);
+  document.getElementById("output").innerText += msg + "\n";
+}
+
+// Owner functions
 async function startLottery() {
   try {
     await contract.methods.startLottery().send({ from: accounts[0] });
-    console.log("Lottery started!");
-  } catch (err) {
-    console.error(err);
-  }
+    log("Lottery started!");
+  } catch (err) { log("startLottery error: " + err.message); }
 }
 
-async function buyTicket() {
+async function stopLottery() {
   try {
-    const price = await contract.methods.ticketPrice().call();
-
-    await contract.methods.buyTicket().send({
-      from: accounts[0],
-      value: price
-    });
-
-    console.log("Ticket bought!");
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function showPlayers() {
-  const players = await contract.methods.getPlayers().call();
-  console.log("Players:", players);
+    await contract.methods.stopLottery().send({ from: accounts[0] });
+    log("Lottery stopped!");
+  } catch (err) { log("stopLottery error: " + err.message); }
 }
 
 async function drawWinner() {
   try {
     await contract.methods.drawWinner().send({ from: accounts[0] });
-    console.log("Winner selected!");
-  } catch (err) {
-    console.error("drawWinner error:", err);
-  }
+    log("Winner drawn!");
+  } catch (err) { log("drawWinner error: " + err.message); }
 }
 
-async function showWinner() {
+async function setTicketPricePrompt() {
+  const price = prompt("Enter new ticket price in wei:");
+  if (price) setTicketPrice(price);
+}
+
+async function setTicketPrice(newPrice) {
   try {
-    const winner = await contract.methods.winner().call();
-    console.log("Winner address:", winner);
+    await contract.methods.setTicketPrice(newPrice).send({ from: accounts[0] });
+    log("Ticket price set to " + newPrice);
+  } catch (err) { log("setTicketPrice error: " + err.message); }
+}
 
-    document.getElementById("winner").innerText =
-      winner === "0x0000000000000000000000000000000000000000"
-      ? "Winner: nobody yet"
-      : "Winner: " + winner;
+async function setMinPlayersPrompt() {
+  const minP = prompt("Enter new min players:");
+  if (minP) setMinPlayers(minP);
+}
 
-  } catch (err) {
-    console.error("showWinner error:", err);
-  }
+async function setMinPlayers(minPlayers) {
+  try {
+    await contract.methods.setMinPlayers(minPlayers).send({ from: accounts[0] });
+    log("Min players set to " + minPlayers);
+  } catch (err) { log("setMinPlayers error: " + err.message); }
+}
+
+async function withdrawAllByOwnerPrompt() {
+  const to = prompt("Enter address to withdraw all funds to:");
+  if (to) withdrawAllByOwner(to);
+}
+
+async function withdrawAllByOwner(to) {
+  try {
+    await contract.methods.withdrawAllByOwner(to).send({ from: accounts[0] });
+    log("Owner withdrew all funds to " + to);
+  } catch (err) { log("withdrawAllByOwner error: " + err.message); }
+}
+
+// Player functions
+async function buyTicket() {
+  try {
+    const price = await contract.methods.ticketPrice().call();
+    await contract.methods.buyTicket().send({ from: accounts[0], value: price });
+    log("Ticket bought!");
+  } catch (err) { log("buyTicket error: " + err.message); }
 }
 
 async function withdrawPrize() {
   try {
     await contract.methods.withdrawPrize().send({ from: accounts[0] });
-    console.log("Prize withdrawn!");
-  } catch (err) {
-    console.error("withdrawPrize error:", err);
-  }
+    log("Prize withdrawn!");
+  } catch (err) { log("withdrawPrize error: " + err.message); }
 }
 
-init();
+// View info
+async function showPlayers() {
+  const players = await contract.methods.getPlayers().call();
+  log("Players: " + (players.length ? players.join(", ") : "none"));
+}
+
+async function showPlayersCount() {
+  const count = await contract.methods.getPlayersCount().call();
+  log("Players count: " + count);
+}
+
+async function showWinner() {
+  const winner = await contract.methods.winner().call();
+  log("Winner: " + (winner === "0x0000000000000000000000000000000000000000" ? "none" : winner));
+}
+
+async function showStatus() {
+  const status = await contract.methods.getStatus().call();
+  log(`Status:
+  Active: ${status.active}
+  Ticket price: ${status.price}
+  Min players: ${status.minP}
+  Players count: ${status.playersCount}
+  Current winner: ${status.currentWinner}`);
+}
+
+async function showBalance() {
+  const balance = await contract.methods.getBalance().call();
+  log("Contract balance: " + web3.utils.fromWei(balance, "ether") + " ETH");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  init();
+});
