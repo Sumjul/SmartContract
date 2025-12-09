@@ -1,0 +1,92 @@
+/* General container */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Section styles */
+section {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+h2 {
+  margin-top: 0;
+  color: #444;
+}
+
+/* Button styles */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+/* Owner buttons: blue */
+.owner-section button {
+  background-color: #1e90ff;
+  color: white;
+}
+
+.owner-section button:hover {
+  background-color: #1c7ed6;
+}
+
+/* Player buttons: green */
+.player-section button {
+  background-color: #28a745;
+  color: white;
+}
+
+.player-section button:hover {
+  background-color: #218838;
+}
+
+/* Info buttons: gray */
+.info-section button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.info-section button:hover {
+  background-color: #5a6268;
+}
+
+/* Log section */
+.log-section pre {
+  background-color: #272822;
+  color: #f8f8f2;
+  padding: 15px;
+  border-radius: 8px;
+  height: 280px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.8;
+}

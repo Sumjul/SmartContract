@@ -3,31 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Blockchain Lottery</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Blockchain Lottery Frontend</h1>
+  <div class="container">
+    <h1>Blockchain Lottery Frontend</h1>
 
-  <h2>Owner actions</h2>
-  <button onclick="startLottery()">Start Lottery</button>
-  <button onclick="stopLottery()">Stop Lottery</button>
-  <button onclick="drawWinner()">Draw Winner</button>
-  <button onclick="setTicketPricePrompt()">Set Ticket Price</button>
-  <button onclick="setMinPlayersPrompt()">Set Min Players</button>
-  <button onclick="withdrawAllByOwnerPrompt()">Withdraw All</button>
+    <section class="owner-section">
+      <h2>Owner Actions</h2>
+      <div class="buttons">
+        <button onclick="startLottery()">Start Lottery</button>
+        <button onclick="stopLottery()">Stop Lottery</button>
+        <button onclick="drawWinner()">Draw Winner</button>
+        <button onclick="setTicketPricePrompt()">Set Ticket Price</button>
+        <button onclick="setMinPlayersPrompt()">Set Min Players</button>
+        <button onclick="withdrawAllByOwnerPrompt()">Withdraw All</button>
+      </div>
+    </section>
 
-  <h2>Player actions</h2>
-  <button onclick="buyTicket()">Buy Ticket</button>
-  <button onclick="withdrawPrize()">Withdraw Prize</button>
+    <section class="player-section">
+      <h2>Player Actions</h2>
+      <div class="buttons">
+        <button onclick="buyTicket()">Buy Ticket</button>
+        <button onclick="withdrawPrize()">Withdraw Prize</button>
+      </div>
+    </section>
 
-  <h2>View info</h2>
-  <button onclick="showPlayers()">Show Players</button>
-  <button onclick="showPlayersCount()">Players Count</button>
-  <button onclick="showWinner()">Show Winner</button>
-  <button onclick="showStatus()">Show Status</button>
-  <button onclick="showBalance()">Show Contract Balance</button>
+    <section class="info-section">
+      <h2>View Info</h2>
+      <div class="buttons">
+        <button onclick="showPlayers()">Show Players</button>
+        <button onclick="showPlayersCount()">Players Count</button>
+        <button onclick="showWinner()">Show Winner</button>
+        <button onclick="showStatus()">Show Status</button>
+        <button onclick="showBalance()">Show Contract Balance</button>
+      </div>
+    </section>
 
-  <h2>Logs</h2>
-  <pre id="output" style="background:#f0f0f0; padding:10px; height:200px; overflow:auto;"></pre>
+    <section class="log-section">
+      <h2>Logs</h2>
+      <pre id="output"></pre>
+    </section>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/web3@1.9.0/dist/web3.min.js"></script>
   <script src="app.js"></script>

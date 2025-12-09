@@ -547,6 +547,16 @@ async function buyTicket() {
   } catch (err) { log("buyTicket error: " + err.message); }
 }
 
+async function checkMyTicket() {
+  const has = await contract.methods.hasTicket(accounts[0]).call();
+  log("You " + (has ? "have" : "do not have") + " a ticket.");
+}
+
+async function checkMyWinnings() {
+  const win = await contract.methods.pendingWinnings(accounts[0]).call();
+  log("Your pending winnings: " + web3.utils.fromWei(win, "ether") + " ETH");
+}
+
 async function withdrawPrize() {
   try {
     await contract.methods.withdrawPrize().send({ from: accounts[0] });
@@ -583,6 +593,18 @@ async function showStatus() {
 async function showBalance() {
   const balance = await contract.methods.getBalance().call();
   log("Contract balance: " + web3.utils.fromWei(balance, "ether") + " ETH");
+}
+
+function clearLog() {
+  const out = document.getElementById("output");
+  if (out) out.innerText = "";
+}
+
+function log(msg) {
+  console.log(msg);
+  const output = document.getElementById("output");
+  output.innerText += msg + "\n";
+  output.scrollTop = output.scrollHeight;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
