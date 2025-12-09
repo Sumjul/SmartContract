@@ -171,6 +171,26 @@ async function init() {
       "type": "event"
     },
     {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "hasTicket",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
       "inputs": [],
       "name": "isActive",
       "outputs": [
@@ -181,7 +201,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -194,7 +215,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -207,7 +229,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -226,7 +249,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -245,7 +269,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -258,7 +283,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -271,7 +297,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -284,7 +311,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -317,7 +345,8 @@ async function init() {
       "name": "buyTicket",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -371,7 +400,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -384,7 +414,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -397,7 +428,8 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -430,9 +462,10 @@ async function init() {
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
-  ];
+    ];
     const contractAddress = "0x8724Be47A52aA5b922DDA6313A4bA2E80b57224A";
     contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -474,6 +507,39 @@ async function buyTicket() {
 async function showPlayers() {
   const players = await contract.methods.getPlayers().call();
   console.log("Players:", players);
+}
+
+async function drawWinner() {
+  try {
+    await contract.methods.drawWinner().send({ from: accounts[0] });
+    console.log("Winner selected!");
+  } catch (err) {
+    console.error("drawWinner error:", err);
+  }
+}
+
+async function showWinner() {
+  try {
+    const winner = await contract.methods.winner().call();
+    console.log("Winner address:", winner);
+
+    document.getElementById("winner").innerText =
+      winner === "0x0000000000000000000000000000000000000000"
+      ? "Winner: nobody yet"
+      : "Winner: " + winner;
+
+  } catch (err) {
+    console.error("showWinner error:", err);
+  }
+}
+
+async function withdrawPrize() {
+  try {
+    await contract.methods.withdrawPrize().send({ from: accounts[0] });
+    console.log("Prize withdrawn!");
+  } catch (err) {
+    console.error("withdrawPrize error:", err);
+  }
 }
 
 init();
