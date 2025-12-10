@@ -47,7 +47,7 @@ Organizatorius paskelbia naują loteriją, sutartis aktyvuojama, dalyviai gali t
 
 ---
 
-![Sequence diagram — BlockchainLottery](diagrams/SequenceDiagram.png)
+![Sekos diagrama — BlockchainLottery](./diagrams/SequenceDiagram.png)
 
 ---
 
@@ -89,6 +89,18 @@ truffle migrate --network sepolia
 truffle exec ./test/sepolia-test.js --network sepolia
 ```
 
+### Front-End naudojimas
+
+1. Atidaryti `index.html` naršyklėje.
+2. Prisijungti prie MetaMask su viena iš testinių paskyrų.
+3. Pagrindinių mygtukų funkcijos:
+   - "Start Lottery" – pradėti loteriją (tik savininkui)
+   - "Buy Ticket" – įsigyti bilietą
+   - "Draw Winner" – išrinkti laimėtoją (tik savininkui)
+   - "Withdraw Prize" – atsiimti prizą
+   - Kiti mygtukai atlieka mažiau svarbias funkcijas arba pateikia statistiką
+4. Paspaudus mygtukus, ekrane rodomi globalūs statuso pranešimai apie tranzakcijų eigą, o išsamesnė informacija pateikiama logų konsolėje.
+
 ## Naudojami Metamask adresai
 
 Owner:  
@@ -102,6 +114,10 @@ Player2:
 
 Player3:  
 `0x5afc5eeb99284e771e666d66d4f7c1955a820688`
+
+## Kontrakto adresas
+
+`0x8724Be47A52aA5b922DDA6313A4bA2E80b57224A`
 
 ## Projekto struktūra
 
@@ -154,5 +170,5 @@ Perėjęs į Sepolia testnet, atlikau papildomus testus su MetaMask paskyromis i
 **Autorius:** Julius Vilkanec  
 **Studijų programa:** Informacinių sistemų inžinerija, Vilniaus Universitetas  
 **Kursas:** 2 kursas  
-**Versija:** v0.1  
-**Data:** 2025-12-09
+**Versija:** release v0.1  
+**Data:** 2025-12-10
